@@ -3,6 +3,8 @@ package com.example.demo.Repository.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 public class Trains {
@@ -11,9 +13,9 @@ public class Trains {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int TrainNumber;
 
-
     @Column
     private String TrainName;
+
 
 //    @JsonIgnore
 //    @ManyToOne
@@ -22,9 +24,9 @@ public class Trains {
 
 
     public Trains(int trainNumber, String trainName) {
+        TrainNumber = trainNumber;
+        TrainName = trainName;
 
-        this.TrainNumber = trainNumber;
-        this.TrainName = trainName;
     }
 
     public Trains() {
@@ -46,16 +48,11 @@ public class Trains {
 
     public void setTrainName(String trainName) {
         TrainName = trainName;
-//    }  public Users getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(Users user) {
-//        this.user = user;
-//    }
 
 
     }
+
+
 
     @Override
     public String toString() {

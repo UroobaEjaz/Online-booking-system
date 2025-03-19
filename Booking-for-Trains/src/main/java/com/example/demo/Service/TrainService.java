@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TrainService {
@@ -25,10 +26,15 @@ public class TrainService {
         return trainJpa.findAll();
     }
 
+    public Optional<Trains> getTrainById(int trainNumber) {
+        return Optional.ofNullable(trainJpa.findById(trainNumber).orElse(null));
+    }
+
     public void deleteTrainById(int id){
         trainJpa.deleteById(id);
-
     }
+
+
 
 
 

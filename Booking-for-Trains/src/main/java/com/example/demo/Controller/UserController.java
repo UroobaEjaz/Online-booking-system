@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.Repository.entity.Users;
 import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,17 +34,26 @@ public class UserController {
 
 
     @PostMapping("/logIn")
-    public String logIn(@RequestBody Users users) {
-        Users existingUser = userService.getUserById(users.getUserId());
+    public ResponseEntity<String> logIn(@RequestBody Users users) {
+        // Get the user from the database by userId
+        Optional<Users> existingUserOpt = userService.getUserById(users.getUserId());
 
-        if (existingUser != null && existingUser.getPassword().equals(users.getPassword())) {
-            return "Successful login";
+        if (existingUserOpt.isPresent()) {
+            Users existingUser = existingUserOpt.get();
+
+            // Assuming password is hashed. Compare with hashed password
+            if (existingUser.getPassword().equals(users.getPassword())) {
+                return ResponseEntity.ok("Successful login");
+            }
         }
 
-        return "Unsuccessful login";
+        return ResponseEntity.status(401).body("Unsuccessful login");
     }
-
-
-
-
 }
+
+
+
+
+
+
+

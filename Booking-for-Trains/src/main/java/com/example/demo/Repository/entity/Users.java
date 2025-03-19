@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Users {
@@ -40,6 +41,7 @@ public class Users {
     @OneToMany
     @JoinColumn
     private List<Trains> trains;
+
 
 
 
@@ -104,6 +106,7 @@ public class Users {
         this.trains = trains;
     }
 
+
     @Override
     public String toString() {
         return "Users{" +
@@ -115,5 +118,6 @@ public class Users {
                 ", trains=" + trains +
                 '}';
     }
+
 }
 

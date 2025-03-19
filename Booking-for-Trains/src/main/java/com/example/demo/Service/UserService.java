@@ -1,12 +1,10 @@
 package com.example.demo.Service;
 
+import com.example.demo.Repository.JPA.TrainJpa;
 import com.example.demo.Repository.JPA.UserJpa;
-import com.example.demo.Repository.entity.Trains;
 import com.example.demo.Repository.entity.Users;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,17 +14,22 @@ public class UserService {
 
     private final UserJpa userJpa;
 
-    public UserService(UserJpa userJpa) {
+    private final TrainJpa trainJpa;
+
+    public UserService(UserJpa userJpa, TrainJpa trainJpa) {
         this.userJpa = userJpa;
+        this.trainJpa = trainJpa;
     }
 
     public Users saveUser(Users user) {
         return userJpa.save(user);
     }
 
-    public Users getUserById(int userId) {
-        return userJpa.findById(userId).orElse(null);
+    public Optional<Users> getUserById(int userId) {
+        return userJpa.findById(userId);
     }
+
+
 
 
     // Method to add user
@@ -34,13 +37,13 @@ public class UserService {
         return userJpa.save(newUser);  // Save user to the database
     }
 
-    public List <Users> getAllUsers(){
+    public List<Users> getAllUsers() {
         return userJpa.findAll();
     }
 
-   public void deleteUsers(int id){
+    public void deleteUsers(int id) {
         userJpa.deleteById(id);
-   }
-
+    }
 
 }
+
