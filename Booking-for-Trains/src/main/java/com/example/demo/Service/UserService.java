@@ -36,4 +36,9 @@ public class UserService {
     public List <Users> getAllUsers(){
         return userJpa.findAll();
     }
+
+   public void deleteUsers(int id){
+        userJpa.deleteById(id);
+   }
+
 }

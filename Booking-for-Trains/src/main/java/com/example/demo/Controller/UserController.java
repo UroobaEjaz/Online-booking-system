@@ -3,10 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.Repository.entity.Users;
 import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,15 @@ public class UserController {
         public List<Users> viewUsers(){
             return userService.getAllUsers();
         }
+
+        @DeleteMapping("/delete/user{id}")
+        public String deleteByUserId(@PathVariable int id){
+            userService.deleteUsers(id);
+            return "User deleted successfully";
+        }
+
+
+
 
 
 
