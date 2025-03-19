@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
 
     @Autowired
     private UserService userService;
-        @PostMapping("/addUser")
+        @PostMapping("/signUp")
         public Users addUser(@RequestBody Users newUser){
             return userService.addUser(newUser);
         }
@@ -28,7 +29,19 @@ public class UserController {
             return "User deleted successfully";
         }
 
+        //create a log In API
 
+
+    @PostMapping("/logIn")
+    public String logIn(@RequestBody Users users) {
+        Users existingUser = userService.getUserById(users.getUserId());
+
+        if (existingUser != null && existingUser.getPassword().equals(users.getPassword())) {
+            return "Successful login";
+        }
+
+        return "Unsuccessful login";
+    }
 
 
 
