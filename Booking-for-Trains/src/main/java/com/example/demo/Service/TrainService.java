@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.Repository.JPA.TrainJpa;
 import com.example.demo.Repository.entity.Trains;
+import jakarta.persistence.Id;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +25,10 @@ public class TrainService {
         return trainJpa.findAll();
     }
 
+    public void deleteTrainById(int id){
+        trainJpa.deleteById(id);
+
+    }
 
 
 
